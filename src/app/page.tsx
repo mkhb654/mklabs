@@ -16,15 +16,94 @@ const pillars = [
   { icon: "📈", name: "GROWTH", desc: "Predictive analytics. Revenue accelerated.", color: "#10B981" },
 ];
 
-const steps = [
-  { num: "01", title: "Discover", desc: "Audit your operations. Map your data. Find the gaps." },
-  { num: "02", title: "Clean + Connect", desc: "Organize your data. Build the foundation AI needs." },
-  { num: "03", title: "Memory + Intel", desc: "Your business gets a brain. Custom ML on your data." },
-  { num: "04", title: "Agent Orchestration", desc: "AI agents run your workflows. Business runs without you." },
+const phases = [
+  {
+    num: "01",
+    title: "Discover",
+    color: "#F59E0B",
+    headline: "We learn your business inside out.",
+    desc: "Connect to your systems. Interview key people. Map every workflow.",
+    before: [
+      "Knowledge trapped in people's heads",
+      "No documentation or SOPs",
+      "Disconnected departments",
+      "Blind to departure risk",
+    ],
+    after: [
+      "Full operational map complete",
+      "Automation targets identified",
+      "Risk assessment delivered",
+      "Prioritized AI roadmap in hand",
+    ],
+  },
+  {
+    num: "02",
+    title: "Clean",
+    color: "#3B82F6",
+    headline: "Build the foundation AI needs.",
+    desc: "Clean your data. Digitize what's on paper. Connect your systems.",
+    before: [
+      "Data in 12 different places",
+      "Paper records and filing cabinets",
+      "Copy-paste between systems",
+      "Hours wasted finding information",
+    ],
+    after: [
+      "One unified data layer",
+      "Everything digitized and searchable",
+      "Systems connected automatically",
+      "Clean data ready for AI",
+    ],
+  },
+  {
+    num: "03",
+    title: "Memory",
+    color: "#8B5CF6",
+    headline: "Your business gets a brain.",
+    desc: "Searchable AI knowledge base. Real-time dashboards. Custom ML on your data.",
+    before: [
+      '"Ask Bob — he knows how that works"',
+      "Reports take days to compile",
+      "Decisions based on gut feeling",
+      "Key people leave, knowledge leaves",
+    ],
+    after: [
+      "Ask the AI — it has full context",
+      "Real-time dashboards, always current",
+      "Decisions backed by data",
+      "Knowledge preserved permanently",
+    ],
+  },
+  {
+    num: "04",
+    title: "Agents",
+    color: "#10B981",
+    headline: "AI agents run your workflows.",
+    desc: "Intelligent agents across sales, marketing, finance. Your business runs without you.",
+    before: [
+      "Founder approves every decision",
+      "Sales team works off instinct",
+      "Customer issues caught too late",
+      "Growth limited by headcount",
+    ],
+    after: [
+      "AI agents handle routine decisions",
+      "Sales managed by automation",
+      "Churn predicted 60 days out",
+      "Business scales without linear hiring",
+    ],
+  },
 ];
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const [activePhase, setActivePhase] = useState(0);
+  const [showAfter, setShowAfter] = useState<{ [key: number]: boolean }>({
+    0: false,
+    1: false,
+    2: false,
+    3: false,
+  });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -32,9 +111,15 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleBeforeAfter = (phaseIndex: number, isAfter: boolean) => {
+    setShowAfter((prev) => ({ ...prev, [phaseIndex]: isAfter }));
+  };
+
+  const p = phases[activePhase];
+
   return (
     <div className="min-h-screen bg-[#060606] text-[#E4E4E7]">
-      {/* NAV - Fixed */}
+      {/* NAV */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 px-8 md:px-12 py-5 flex justify-between items-center transition-all duration-300 ${
           scrolled
@@ -58,7 +143,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO - Full viewport */}
+      {/* HERO */}
       <section className="min-h-screen flex flex-col justify-center items-center text-center px-8 md:px-12 relative">
         <div className="text-[11px] tracking-[6px] text-[#444] uppercase mb-12 mono">
           AI IMPLEMENTATION PARTNER //
@@ -79,14 +164,14 @@ export default function Home() {
         />
       </section>
 
-      {/* MARQUEE - Full width */}
+      {/* MARQUEE */}
       <div className="border-t border-b border-[#151515] py-4 overflow-hidden whitespace-nowrap">
         <div className="inline-block marquee-animate text-[13px] font-bold text-[#1A1A1A] tracking-[5px] uppercase mono">
           AUTOMATE // SCALE // SELL // MEMORY // INTEL // FLOW // GROWTH // AUTOMATE // SCALE // SELL // MEMORY // INTEL // FLOW // GROWTH // AUTOMATE // SCALE // SELL // MEMORY // INTEL // FLOW // GROWTH //&nbsp;
         </div>
       </div>
 
-      {/* VALUATION - Near full viewport */}
+      {/* VALUATION */}
       <section className="min-h-screen flex flex-col justify-center py-32 px-8 md:px-12">
         <div className="max-w-[1100px] mx-auto w-full">
           <div className="text-[12px] tracking-[5px] uppercase mb-6 mono text-[#10B981]">
@@ -127,7 +212,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PILLARS - Near full viewport */}
+      {/* PILLARS */}
       <section className="min-h-screen flex flex-col justify-center py-32 px-8 md:px-12 border-t border-[#151515]">
         <div className="max-w-[1100px] mx-auto w-full">
           <div className="text-[12px] tracking-[5px] uppercase mb-6 mono text-[#3B82F6]">
@@ -146,17 +231,17 @@ export default function Home() {
               background: "#151515",
             }}
           >
-            {pillars.map((p, i) => (
+            {pillars.map((pl, i) => (
               <div key={i} className="bg-[#0A0A0A] py-12 px-8">
-                <div className="text-[48px] mb-6">{p.icon}</div>
+                <div className="text-[48px] mb-6">{pl.icon}</div>
                 <div
                   className="text-[13px] font-bold tracking-[3px] mb-4 mono"
-                  style={{ color: p.color }}
+                  style={{ color: pl.color }}
                 >
-                  {p.name}
+                  {pl.name}
                 </div>
                 <p className="text-[18px] font-normal text-[#555] leading-relaxed">
-                  {p.desc}
+                  {pl.desc}
                 </p>
               </div>
             ))}
@@ -164,42 +249,122 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ROADMAP - Near full viewport */}
+      {/* ROADMAP WITH TABS */}
       <section className="min-h-screen flex flex-col justify-center py-32 px-8 md:px-12 border-t border-[#151515]">
         <div className="max-w-[1100px] mx-auto w-full">
           <div className="text-[12px] tracking-[5px] uppercase mb-6 mono text-[#8B5CF6]">
             (03) THE ROADMAP //
           </div>
-          <h2 className="text-[clamp(40px,7vw,72px)] font-black text-white leading-[0.95] mb-20 tracking-[-3px]">
+          <h2 className="text-[clamp(40px,7vw,72px)] font-black text-white leading-[0.95] mb-16 tracking-[-3px]">
             Start small.
             <br />
             Prove it. Scale.
           </h2>
 
-          <div>
-            {steps.map((s, i) => (
+          {/* Phase Tabs */}
+          <div className="flex border-b border-[#151515]">
+            {phases.map((ph, i) => (
               <div
                 key={i}
-                className={`flex items-start gap-8 py-10 ${
-                  i < steps.length - 1 ? "border-b border-[#151515]" : ""
-                }`}
+                onClick={() => setActivePhase(i)}
+                className="flex-1 cursor-pointer py-5 px-4 text-center transition-all"
+                style={{
+                  borderBottom:
+                    i === activePhase
+                      ? `3px solid ${ph.color}`
+                      : "3px solid transparent",
+                }}
               >
-                <div className="text-[48px] font-bold text-[#1A1A1A] leading-none min-w-[80px] mono">
-                  {s.num}
+                <div
+                  className="text-[11px] tracking-[2px] mb-2 mono"
+                  style={{
+                    color: i === activePhase ? ph.color : "#333",
+                  }}
+                >
+                  ({ph.num})
                 </div>
-                <div>
-                  <div className="text-[28px] font-bold text-white mb-3 tracking-tight">
-                    {s.title}
-                  </div>
-                  <p className="text-[18px] text-[#555] leading-relaxed">{s.desc}</p>
+                <div
+                  className="text-[14px] font-bold tracking-wide uppercase"
+                  style={{
+                    color: i === activePhase ? "#fafafa" : "#444",
+                  }}
+                >
+                  {ph.title}
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Phase Content */}
+          <div className="bg-[#0A0A0A] border border-[#151515] border-t-0 rounded-b-xl">
+            <div className="p-8 border-b border-[#151515]">
+              <div className="text-[26px] font-bold text-white mb-3">
+                {p.headline}
+              </div>
+              <div className="text-[16px] text-[#555] leading-relaxed">
+                {p.desc}
+              </div>
+            </div>
+
+            <div className="p-8">
+              {/* Before/After Toggle */}
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-[10px] tracking-[3px] text-[#444] uppercase mono">
+                  Your Business
+                </span>
+                <div className="inline-flex bg-[#151515] rounded-[4px] p-[3px] gap-[2px]">
+                  <button
+                    onClick={() => toggleBeforeAfter(activePhase, false)}
+                    className={`px-5 py-2 rounded-[3px] text-[11px] font-bold tracking-wide mono transition-all ${
+                      !showAfter[activePhase]
+                        ? "bg-[#DC2626] text-white"
+                        : "text-[#444] hover:text-[#666]"
+                    }`}
+                  >
+                    BEFORE
+                  </button>
+                  <button
+                    onClick={() => toggleBeforeAfter(activePhase, true)}
+                    className={`px-5 py-2 rounded-[3px] text-[11px] font-bold tracking-wide mono transition-all ${
+                      showAfter[activePhase]
+                        ? "bg-[#10B981] text-white"
+                        : "text-[#444] hover:text-[#666]"
+                    }`}
+                  >
+                    AFTER
+                  </button>
+                </div>
+              </div>
+
+              {/* Before/After Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {(showAfter[activePhase] ? p.after : p.before).map((item, i) => (
+                  <div
+                    key={i}
+                    className={`flex items-center gap-3 p-4 rounded-[5px] text-[14px] ${
+                      showAfter[activePhase]
+                        ? "bg-[#10B981]/5 border border-[#10B981]/15 text-[#A1A1AA]"
+                        : "bg-[#DC2626]/5 border border-[#DC2626]/15 text-[#A1A1AA]"
+                    }`}
+                  >
+                    <span
+                      className="text-[13px] shrink-0"
+                      style={{
+                        color: showAfter[activePhase] ? "#10B981" : "#DC2626",
+                      }}
+                    >
+                      {showAfter[activePhase] ? "✓" : "✗"}
+                    </span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* CTA - Full viewport */}
+      {/* CTA */}
       <section className="min-h-screen flex flex-col justify-center items-center py-32 px-8 md:px-12 text-center border-t border-[#151515]">
         <h2 className="text-[clamp(40px,7vw,80px)] font-black text-white leading-[0.95] mb-8 tracking-[-3px]">
           Wherever you are
