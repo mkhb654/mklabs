@@ -97,25 +97,13 @@ const phases = [
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
-  const [activePhase, setActivePhase] = useState(0);
-  const [showAfter, setShowAfter] = useState<{ [key: number]: boolean }>({
-    0: false,
-    1: false,
-    2: false,
-    3: false,
-  });
+  const [showAfter, setShowAfter] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const toggleBeforeAfter = (phaseIndex: number, isAfter: boolean) => {
-    setShowAfter((prev) => ({ ...prev, [phaseIndex]: isAfter }));
-  };
-
-  const p = phases[activePhase];
 
   return (
     <div className="min-h-screen bg-[#060606] text-[#E4E4E7]">
@@ -249,117 +237,102 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ROADMAP WITH TABS */}
+      {/* ROADMAP - TRANSFORMATION VIEW */}
       <section className="min-h-screen flex flex-col justify-center py-32 px-8 md:px-12 border-t border-[#151515]">
         <div className="max-w-[1100px] mx-auto w-full">
           <div className="text-[12px] tracking-[5px] uppercase mb-6 mono text-[#8B5CF6]">
             (03) THE ROADMAP //
           </div>
-          <h2 className="text-[clamp(40px,7vw,72px)] font-black text-white leading-[0.95] mb-16 tracking-[-3px]">
+          <h2 className="text-[clamp(40px,7vw,72px)] font-black text-white leading-[0.95] mb-8 tracking-[-3px]">
             Start small.
             <br />
             Prove it. Scale.
           </h2>
 
-          {/* Phase Tabs */}
-          <div className="flex border-b border-[#151515]">
-            {phases.map((ph, i) => (
-              <div
-                key={i}
-                onClick={() => setActivePhase(i)}
-                className="flex-1 cursor-pointer py-5 px-4 text-center transition-all"
-                style={{
-                  borderBottom:
-                    i === activePhase
-                      ? `3px solid ${ph.color}`
-                      : "3px solid transparent",
-                }}
+          {/* Master Toggle */}
+          <div className="flex items-center gap-6 mb-12">
+            <span className="text-[11px] tracking-[4px] text-[#555] uppercase mono">
+              Your Business
+            </span>
+            <div className="inline-flex bg-[#151515] rounded-[6px] p-[4px] gap-[3px]">
+              <button
+                onClick={() => setShowAfter(false)}
+                className={`px-8 py-3 rounded-[4px] text-[12px] font-bold tracking-[2px] mono transition-all duration-300 ${
+                  !showAfter
+                    ? "bg-[#DC2626] text-white shadow-lg shadow-red-500/20"
+                    : "text-[#555] hover:text-[#777]"
+                }`}
               >
-                <div
-                  className="text-[11px] tracking-[2px] mb-2 mono"
-                  style={{
-                    color: i === activePhase ? ph.color : "#333",
-                  }}
-                >
-                  ({ph.num})
+                BEFORE
+              </button>
+              <button
+                onClick={() => setShowAfter(true)}
+                className={`px-8 py-3 rounded-[4px] text-[12px] font-bold tracking-[2px] mono transition-all duration-300 ${
+                  showAfter
+                    ? "bg-[#10B981] text-white shadow-lg shadow-emerald-500/20"
+                    : "text-[#555] hover:text-[#777]"
+                }`}
+              >
+                AFTER
+              </button>
+            </div>
+          </div>
+
+          {/* All Phases */}
+          <div className="space-y-4">
+            {phases.map((phase, phaseIdx) => (
+              <div
+                key={phaseIdx}
+                className={`rounded-xl overflow-hidden transition-all duration-500 ${
+                  showAfter
+                    ? "bg-[#10B981]/5 border border-[#10B981]/20"
+                    : "bg-[#DC2626]/5 border border-[#DC2626]/20"
+                }`}
+              >
+                {/* Phase Header */}
+                <div className="flex items-center gap-4 px-6 py-4 border-b border-[#151515]/50">
+                  <div
+                    className="text-[11px] tracking-[2px] mono"
+                    style={{ color: phase.color }}
+                  >
+                    ({phase.num})
+                  </div>
+                  <div
+                    className="text-[16px] font-bold tracking-wide uppercase"
+                    style={{ color: phase.color }}
+                  >
+                    {phase.title}
+                  </div>
+                  <div className="flex-1 h-[1px] bg-[#151515]" />
+                  <div className="text-[13px] text-[#444] italic hidden md:block">
+                    {phase.headline}
+                  </div>
                 </div>
-                <div
-                  className="text-[14px] font-bold tracking-wide uppercase"
-                  style={{
-                    color: i === activePhase ? "#fafafa" : "#444",
-                  }}
-                >
-                  {ph.title}
+
+                {/* Phase Items */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-5">
+                  {(showAfter ? phase.after : phase.before).map((item, i) => (
+                    <div
+                      key={i}
+                      className={`flex items-center gap-3 p-4 rounded-lg text-[14px] transition-all duration-300 ${
+                        showAfter
+                          ? "bg-[#10B981]/10 text-[#B4B4B4]"
+                          : "bg-[#DC2626]/10 text-[#B4B4B4]"
+                      }`}
+                    >
+                      <span
+                        className={`text-[15px] shrink-0 transition-all duration-300 ${
+                          showAfter ? "text-[#10B981]" : "text-[#DC2626]"
+                        }`}
+                      >
+                        {showAfter ? "✓" : "✗"}
+                      </span>
+                      {item}
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Phase Content */}
-          <div className="bg-[#0A0A0A] border border-[#151515] border-t-0 rounded-b-xl">
-            <div className="p-8 border-b border-[#151515]">
-              <div className="text-[26px] font-bold text-white mb-3">
-                {p.headline}
-              </div>
-              <div className="text-[16px] text-[#555] leading-relaxed">
-                {p.desc}
-              </div>
-            </div>
-
-            <div className="p-8">
-              {/* Before/After Toggle */}
-              <div className="flex items-center gap-4 mb-6">
-                <span className="text-[10px] tracking-[3px] text-[#444] uppercase mono">
-                  Your Business
-                </span>
-                <div className="inline-flex bg-[#151515] rounded-[4px] p-[3px] gap-[2px]">
-                  <button
-                    onClick={() => toggleBeforeAfter(activePhase, false)}
-                    className={`px-5 py-2 rounded-[3px] text-[11px] font-bold tracking-wide mono transition-all ${
-                      !showAfter[activePhase]
-                        ? "bg-[#DC2626] text-white"
-                        : "text-[#444] hover:text-[#666]"
-                    }`}
-                  >
-                    BEFORE
-                  </button>
-                  <button
-                    onClick={() => toggleBeforeAfter(activePhase, true)}
-                    className={`px-5 py-2 rounded-[3px] text-[11px] font-bold tracking-wide mono transition-all ${
-                      showAfter[activePhase]
-                        ? "bg-[#10B981] text-white"
-                        : "text-[#444] hover:text-[#666]"
-                    }`}
-                  >
-                    AFTER
-                  </button>
-                </div>
-              </div>
-
-              {/* Before/After Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {(showAfter[activePhase] ? p.after : p.before).map((item, i) => (
-                  <div
-                    key={i}
-                    className={`flex items-center gap-3 p-4 rounded-[5px] text-[14px] ${
-                      showAfter[activePhase]
-                        ? "bg-[#10B981]/5 border border-[#10B981]/15 text-[#A1A1AA]"
-                        : "bg-[#DC2626]/5 border border-[#DC2626]/15 text-[#A1A1AA]"
-                    }`}
-                  >
-                    <span
-                      className="text-[13px] shrink-0"
-                      style={{
-                        color: showAfter[activePhase] ? "#10B981" : "#DC2626",
-                      }}
-                    >
-                      {showAfter[activePhase] ? "✓" : "✗"}
-                    </span>
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
