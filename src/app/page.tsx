@@ -195,7 +195,7 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <section className="pt-[100px] pb-[60px] px-7 max-w-[880px] mx-auto text-center">
+      <section className="min-h-screen flex flex-col justify-center px-7 max-w-[880px] mx-auto text-center">
         <div className="text-[9px] tracking-[5px] text-[#2A2A2A] uppercase mb-9 mono">
           FOR BUSINESS OWNERS READY FOR WHAT'S NEXT //
         </div>
@@ -223,7 +223,7 @@ export default function Home() {
       {/* THE PROBLEM */}
       <section
         ref={addRevealRef}
-        className="reveal py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
+        className="reveal min-h-screen flex flex-col justify-center py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
       >
         <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#F59E0B]">
           (01) The Reality //
@@ -256,7 +256,7 @@ export default function Home() {
       {/* THE OPPORTUNITY / VALUATION */}
       <section
         ref={addRevealRef}
-        className="reveal py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
+        className="reveal min-h-screen flex flex-col justify-center py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
       >
         <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#10B981]">
           (02) The Opportunity //
@@ -319,7 +319,7 @@ export default function Home() {
       {/* WHAT WE DO */}
       <section
         ref={addRevealRef}
-        className="reveal py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
+        className="reveal min-h-screen flex flex-col justify-center py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
       >
         <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#3B82F6]">
           (03) What We Do //
@@ -349,7 +349,7 @@ export default function Home() {
       {/* HOW IT WORKS */}
       <section
         ref={addRevealRef}
-        className="reveal py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
+        className="reveal min-h-screen flex flex-col justify-center py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
       >
         <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#8B5CF6]">
           (04) How It Works //
@@ -466,7 +466,7 @@ export default function Home() {
       <section
         id="cta"
         ref={addRevealRef}
-        className="reveal py-[120px] px-7 max-w-[880px] mx-auto text-center border-t border-[#151515]"
+        className="reveal min-h-screen flex flex-col justify-center items-center px-7 max-w-[880px] mx-auto text-center border-t border-[#151515]"
       >
         <h2 className="text-[clamp(26px,5vw,48px)] font-black text-white leading-[1.08] mb-4 tracking-[-2px]">
           Your business is
