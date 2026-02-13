@@ -169,7 +169,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#060606] text-[#E4E4E7]">
       {/* NAV */}
       <nav
-        className={`sticky top-0 z-50 px-7 py-3.5 flex justify-between items-center transition-all duration-400 border-b ${
+        className={`sticky top-0 z-50 px-8 md:px-16 py-3.5 flex justify-between items-center transition-all duration-400 border-b ${
           scrolled
             ? "bg-[#060606]/92 backdrop-blur-[16px] border-[#151515]"
             : "border-transparent"
@@ -195,7 +195,7 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <section className="min-h-screen flex flex-col justify-center px-7 max-w-[880px] mx-auto text-center">
+      <section className="min-h-screen flex flex-col justify-center px-8 md:px-16 max-w-[1200px] mx-auto text-center">
         <div className="text-[9px] tracking-[5px] text-[#2A2A2A] uppercase mb-9 mono">
           FOR BUSINESS OWNERS READY FOR WHAT'S NEXT //
         </div>
@@ -206,7 +206,7 @@ export default function Home() {
           <br />
           <span className="grad">With AI that actually works.</span>
         </h1>
-        <p className="text-[16px] font-light text-[#555] mx-auto max-w-[520px] leading-[1.65]">
+        <p className="text-[16px] font-light text-[#555] mx-auto max-w-[680px] leading-[1.65]">
           We install AI systems into your company that cut costs, save time, and
           raise your valuation — without you needing to understand a single line
           of code.
@@ -223,7 +223,7 @@ export default function Home() {
       {/* THE PROBLEM */}
       <section
         ref={addRevealRef}
-        className="reveal min-h-screen flex flex-col justify-center py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
+        className="reveal min-h-screen flex flex-col justify-center py-20 px-8 md:px-16 max-w-[1200px] mx-auto border-t border-[#151515]"
       >
         <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#F59E0B]">
           (01) The Reality //
@@ -256,7 +256,7 @@ export default function Home() {
       {/* THE OPPORTUNITY / VALUATION */}
       <section
         ref={addRevealRef}
-        className="reveal min-h-screen flex flex-col justify-center py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
+        className="reveal min-h-screen flex flex-col justify-center py-20 px-8 md:px-16 max-w-[1200px] mx-auto border-t border-[#151515]"
       >
         <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#10B981]">
           (02) The Opportunity //
@@ -268,7 +268,7 @@ export default function Home() {
           <br />
           <span className="grad">Period.</span>
         </h2>
-        <p className="text-[15px] font-light text-[#555] leading-[1.65] max-w-[520px]">
+        <p className="text-[15px] font-light text-[#555] leading-[1.65] max-w-[680px]">
           The biggest investment firms in the world now evaluate AI capabilities
           when they buy a business. Companies that have it are worth more.
           Companies that don't are leaving money on the table.
@@ -319,7 +319,7 @@ export default function Home() {
       {/* WHAT WE DO */}
       <section
         ref={addRevealRef}
-        className="reveal min-h-screen flex flex-col justify-center py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
+        className="reveal min-h-screen flex flex-col justify-center py-20 px-8 md:px-16 max-w-[1200px] mx-auto border-t border-[#151515]"
       >
         <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#3B82F6]">
           (03) What We Do //
@@ -349,7 +349,7 @@ export default function Home() {
       {/* HOW IT WORKS */}
       <section
         ref={addRevealRef}
-        className="reveal min-h-screen flex flex-col justify-center py-20 px-7 max-w-[880px] mx-auto border-t border-[#151515]"
+        className="reveal min-h-screen flex flex-col justify-center py-20 px-8 md:px-16 max-w-[1200px] mx-auto border-t border-[#151515]"
       >
         <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#8B5CF6]">
           (04) How It Works //
@@ -361,7 +361,7 @@ export default function Home() {
           <br />
           Then scale.
         </h2>
-        <p className="text-[15px] font-light text-[#555] leading-[1.65] max-w-[520px]">
+        <p className="text-[15px] font-light text-[#555] leading-[1.65] max-w-[680px]">
           No massive upfront investment. No 12-month contract. We earn your
           trust by showing results first.
         </p>
@@ -466,7 +466,7 @@ export default function Home() {
       <section
         id="cta"
         ref={addRevealRef}
-        className="reveal min-h-screen flex flex-col justify-center items-center px-7 max-w-[880px] mx-auto text-center border-t border-[#151515]"
+        className="reveal min-h-screen flex flex-col justify-center items-center px-8 md:px-16 max-w-[1200px] mx-auto text-center border-t border-[#151515]"
       >
         <h2 className="text-[clamp(26px,5vw,48px)] font-black text-white leading-[1.08] mb-4 tracking-[-2px]">
           Your business is
@@ -488,7 +488,7 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-[#151515] py-7 px-7 flex justify-between items-center max-w-[880px] mx-auto">
+      <footer className="border-t border-[#151515] py-7 px-8 md:px-16 flex justify-between items-center max-w-[1200px] mx-auto">
         <div className="flex items-center gap-2">
           <div
             className="w-5 h-5 rounded-[3px] flex items-center justify-center text-[7px] font-bold text-white mono"
