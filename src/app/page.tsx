@@ -10,10 +10,10 @@ const problems = [
 ];
 
 const valuation = [
-  { label: "No AI", mult: "3–5×", pct: 20, color: "#3F3F46" },
-  { label: "Basic tools", sublabel: "(ChatGPT, etc.)", mult: "5–7×", pct: 36, color: "#F59E0B" },
-  { label: "Custom AI", sublabel: "systems", mult: "7–10×", pct: 60, color: "#3B82F6" },
-  { label: "Full AI", sublabel: "integration", mult: "10–12×", pct: 92, color: "#10B981" },
+  { label: "No AI", mult: "3–5×", pct: 20, color: "#3F3F46", featured: false },
+  { label: "Basic tools", sublabel: "(ChatGPT, etc.)", mult: "5–7×", pct: 36, color: "#F59E0B", featured: false },
+  { label: "Custom AI", sublabel: "systems", mult: "7–10×", pct: 60, color: "#3B82F6", featured: true },
+  { label: "Full AI", sublabel: "integration", mult: "10–12×", pct: 92, color: "#10B981", featured: true },
 ];
 
 const pillars = [
@@ -196,8 +196,8 @@ export default function Home() {
 
       {/* HERO */}
       <section className="min-h-screen flex flex-col justify-center px-8 md:px-20 lg:px-32 w-full text-center">
-        <div className="text-[9px] tracking-[5px] text-[#2A2A2A] uppercase mb-9 mono">
-          FOR BUSINESS OWNERS READY FOR WHAT'S NEXT //
+        <div className="text-[9px] tracking-[5px] text-[#10B981] uppercase mb-9 mono">
+          AI IMPLEMENTATION PARTNER //
         </div>
         <h1 className="text-[clamp(42px,8vw,96px)] font-black text-white leading-[1.02] mb-[22px] tracking-[-3px]">
           Make your business
@@ -206,17 +206,84 @@ export default function Home() {
           <br />
           <span className="grad">With AI that actually works.</span>
         </h1>
-        <p className="text-[16px] font-light text-[#555] mx-auto max-w-3xl leading-[1.65]">
-          We install AI systems into your company that cut costs, save time, and
-          raise your valuation — without you needing to understand a single line
-          of code.
+        <p className="text-[16px] font-light text-[#999] mx-auto max-w-3xl leading-[1.65]">
+          Custom AI that makes your business run without you — scale faster,
+          eliminate bottlenecks, and exit big.
         </p>
 
         {/* MARQUEE */}
         <div className="border-t border-b border-[#151515] py-3 overflow-hidden whitespace-nowrap mt-[60px]">
-          <div className="inline-block marquee-animate text-[11px] font-bold text-[#161616] tracking-[4px] uppercase mono">
+          <div className="inline-block marquee-animate text-[11px] font-bold text-[#333] tracking-[4px] uppercase mono">
             SAVE TIME // CUT COSTS // RAISE VALUATION // PROTECT KNOWLEDGE // REDUCE RISK // SCALE FASTER // SAVE TIME // CUT COSTS // RAISE VALUATION // PROTECT KNOWLEDGE // REDUCE RISK // SCALE FASTER // SAVE TIME // CUT COSTS // RAISE VALUATION // PROTECT KNOWLEDGE // REDUCE RISK // SCALE FASTER //&nbsp;
           </div>
+        </div>
+      </section>
+
+      {/* THE OPPORTUNITY / VALUATION */}
+      <section
+        ref={addRevealRef}
+        className="reveal min-h-screen flex flex-col justify-center py-20 px-8 md:px-20 lg:px-32 w-full border-t border-[#151515]"
+      >
+        <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#10B981]">
+          (01) The Opportunity //
+        </div>
+        <h2 className="text-[clamp(36px,6vw,72px)] font-black text-white leading-[1.08] mb-4 tracking-[-2px]">
+          AI is the #1 driver of
+          <br />
+          company valuation.
+          <br />
+          <span className="grad">Period.</span>
+        </h2>
+        <p className="text-[15px] font-light text-[#999] leading-[1.65] max-w-3xl">
+          The biggest investment firms in the world now evaluate AI capabilities
+          when they buy a business. Companies that have it are worth more.
+          Companies that don't are leaving money on the table.
+        </p>
+
+        <div className="mt-10 space-y-3.5">
+          {valuation.map((v, i) => (
+            <div key={i} className="flex items-center gap-3.5">
+              <div className={`w-[110px] shrink-0 text-right leading-[1.3] mono ${v.featured ? 'text-[13px] text-[#ccc]' : 'text-[11px] text-[#888]'}`}>
+                {v.label}
+                {v.sublabel && (
+                  <>
+                    <br />
+                    <span className={v.featured ? 'text-[#999]' : 'text-[#666]'}>{v.sublabel}</span>
+                  </>
+                )}
+              </div>
+              <div className="flex-1">
+                <div
+                  className={`rounded-[3px] flex items-center pl-3.5 ${v.featured ? 'h-[56px]' : 'h-[44px]'}`}
+                  style={{
+                    width: `${v.pct}%`,
+                    background: v.featured
+                      ? `linear-gradient(90deg, ${v.color}15, ${v.color}50)`
+                      : `linear-gradient(90deg, ${v.color}08, ${v.color}35)`,
+                    border: v.featured
+                      ? `2px solid ${v.color}60`
+                      : `1px solid ${v.color}20`,
+                    boxShadow: v.featured ? `0 0 20px ${v.color}30` : 'none',
+                  }}
+                >
+                  <span
+                    className={`font-bold mono ${v.featured ? 'text-[20px]' : 'text-[16px]'}`}
+                    style={{ color: v.color }}
+                  >
+                    {v.mult}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-7 p-4 border border-[rgba(16,185,129,0.12)] rounded-[4px] text-[13px] text-[#999] leading-[1.65] bg-[rgba(16,185,129,0.03)]">
+          We don't set you up with ChatGPT and call it a day. We build AI
+          systems that are{" "}
+          <strong className="text-[#10B981]">custom to your business</strong> —
+          trained on your data, designed for your operations. That's what buyers
+          pay a premium for.
         </div>
       </section>
 
@@ -226,7 +293,7 @@ export default function Home() {
         className="reveal min-h-screen flex flex-col justify-center py-20 px-8 md:px-20 lg:px-32 w-full border-t border-[#151515]"
       >
         <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#F59E0B]">
-          (01) The Reality //
+          (02) The Reality //
         </div>
         <h2 className="text-[clamp(36px,6vw,72px)] font-black text-white leading-[1.08] mb-4 tracking-[-2px]">
           Most businesses run on
@@ -248,72 +315,9 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <p className="mt-7 text-[14px] text-[#444] italic">
+        <p className="mt-7 text-[14px] text-[#777] italic">
           Sound familiar? You're not alone. And it's costing you millions.
         </p>
-      </section>
-
-      {/* THE OPPORTUNITY / VALUATION */}
-      <section
-        ref={addRevealRef}
-        className="reveal min-h-screen flex flex-col justify-center py-20 px-8 md:px-20 lg:px-32 w-full border-t border-[#151515]"
-      >
-        <div className="text-[9px] tracking-[4px] uppercase mb-3.5 mono text-[#10B981]">
-          (02) The Opportunity //
-        </div>
-        <h2 className="text-[clamp(36px,6vw,72px)] font-black text-white leading-[1.08] mb-4 tracking-[-2px]">
-          AI is the #1 driver of
-          <br />
-          company valuation.
-          <br />
-          <span className="grad">Period.</span>
-        </h2>
-        <p className="text-[15px] font-light text-[#555] leading-[1.65] max-w-3xl">
-          The biggest investment firms in the world now evaluate AI capabilities
-          when they buy a business. Companies that have it are worth more.
-          Companies that don't are leaving money on the table.
-        </p>
-
-        <div className="mt-10 space-y-3.5">
-          {valuation.map((v, i) => (
-            <div key={i} className="flex items-center gap-3.5">
-              <div className="w-[110px] shrink-0 text-right text-[11px] text-[#555] leading-[1.3] mono">
-                {v.label}
-                {v.sublabel && (
-                  <>
-                    <br />
-                    <span className="text-[#3F3F46]">{v.sublabel}</span>
-                  </>
-                )}
-              </div>
-              <div className="flex-1">
-                <div
-                  className="h-[44px] rounded-[3px] flex items-center pl-3.5"
-                  style={{
-                    width: `${v.pct}%`,
-                    background: `linear-gradient(90deg, ${v.color}08, ${v.color}35)`,
-                    border: `1px solid ${v.color}20`,
-                  }}
-                >
-                  <span
-                    className="text-[16px] font-bold mono"
-                    style={{ color: v.color }}
-                  >
-                    {v.mult}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-7 p-4 border border-[rgba(16,185,129,0.12)] rounded-[4px] text-[13px] text-[#71717A] leading-[1.65] bg-[rgba(16,185,129,0.03)]">
-          We don't set you up with ChatGPT and call it a day. We build AI
-          systems that are{" "}
-          <strong className="text-[#10B981]">custom to your business</strong> —
-          trained on your data, designed for your operations. That's what buyers
-          pay a premium for.
-        </div>
       </section>
 
       {/* WHAT WE DO */}
@@ -325,9 +329,11 @@ export default function Home() {
           (03) What We Do //
         </div>
         <h2 className="text-[clamp(36px,6vw,72px)] font-black text-white leading-[1.08] mb-4 tracking-[-2px]">
-          Four things that change
+          We build what PE firms
           <br />
-          everything.
+          look for when they
+          <br />
+          <span className="grad">write the check.</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[1px] bg-[#151515] rounded-lg overflow-hidden mt-10">
@@ -340,7 +346,7 @@ export default function Home() {
               >
                 {pl.name}
               </div>
-              <p className="text-[13px] text-[#555] leading-[1.6]">{pl.desc}</p>
+              <p className="text-[13px] text-[#999] leading-[1.6]">{pl.desc}</p>
             </div>
           ))}
         </div>
@@ -361,7 +367,7 @@ export default function Home() {
           <br />
           Then scale.
         </h2>
-        <p className="text-[15px] font-light text-[#555] leading-[1.65] max-w-3xl">
+        <p className="text-[15px] font-light text-[#999] leading-[1.65] max-w-3xl">
           No massive upfront investment. No 12-month contract. We earn your
           trust by showing results first.
         </p>
@@ -382,13 +388,13 @@ export default function Home() {
             >
               <div
                 className="text-[10px] tracking-[2px] mb-0.5 mono transition-colors"
-                style={{ color: i === activePhase ? ph.color : "#1A1A1A" }}
+                style={{ color: i === activePhase ? ph.color : "#555" }}
               >
                 {ph.num}
               </div>
               <div
                 className="text-[11px] font-bold tracking-[0.5px] transition-colors"
-                style={{ color: i === activePhase ? "#fafafa" : "#2A2A2A" }}
+                style={{ color: i === activePhase ? "#fafafa" : "#666" }}
               >
                 {ph.title}
               </div>
@@ -402,13 +408,13 @@ export default function Home() {
             <div className="text-[19px] font-bold text-white mb-2 tracking-[-0.3px]">
               {p.headline}
             </div>
-            <div className="text-[13px] text-[#555] leading-[1.6]">{p.desc}</div>
+            <div className="text-[13px] text-[#999] leading-[1.6]">{p.desc}</div>
           </div>
 
           <div className="py-[22px] px-6">
             {/* Before/After Toggle */}
             <div className="flex items-center gap-2.5 mb-3.5">
-              <span className="text-[9px] tracking-[2.5px] text-[#2A2A2A] uppercase mono">
+              <span className="text-[9px] tracking-[2.5px] text-[#666] uppercase mono">
                 Your Business
               </span>
               <div className="inline-flex bg-[#151515] rounded-[3px] p-[2px] gap-[1px]">
@@ -417,7 +423,7 @@ export default function Home() {
                   className={`px-3.5 py-[5px] rounded-[2px] text-[10px] font-bold tracking-[1px] mono transition-all border-none cursor-pointer ${
                     !showAfter[activePhase]
                       ? "bg-[#DC2626] text-white"
-                      : "bg-transparent text-[#2A2A2A] hover:text-[#444]"
+                      : "bg-transparent text-[#666] hover:text-[#888]"
                   }`}
                 >
                   BEFORE
@@ -427,7 +433,7 @@ export default function Home() {
                   className={`px-3.5 py-[5px] rounded-[2px] text-[10px] font-bold tracking-[1px] mono transition-all border-none cursor-pointer ${
                     showAfter[activePhase]
                       ? "bg-[#10B981] text-white"
-                      : "bg-transparent text-[#2A2A2A] hover:text-[#444]"
+                      : "bg-transparent text-[#666] hover:text-[#888]"
                   }`}
                 >
                   AFTER
@@ -475,7 +481,7 @@ export default function Home() {
           <br />
           <span className="grad">Let's make it worth more.</span>
         </h2>
-        <p className="text-[15px] font-light text-[#444] mb-10 leading-[1.6]">
+        <p className="text-[15px] font-light text-[#888] mb-10 leading-[1.6]">
           One conversation. No pressure. We'll tell you exactly where AI can
           help — and if it can't, we'll tell you that too.
         </p>
@@ -496,9 +502,9 @@ export default function Home() {
           >
             MK
           </div>
-          <span className="text-[10px] text-[#1A1A1A] mono">MKLABS</span>
+          <span className="text-[10px] text-[#666] mono">MKLABS</span>
         </div>
-        <span className="text-[8px] text-[#1A1A1A] tracking-[1px] mono">
+        <span className="text-[8px] text-[#666] tracking-[1px] mono">
           © MK Labs, Inc.
         </span>
       </footer>
